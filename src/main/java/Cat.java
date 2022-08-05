@@ -1,12 +1,15 @@
 package main.java;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import java.io.File;
+import java.util.Map;
 
 public class Cat {
 
     private String catName, catBreed;
+    Map<String, String> catBreeds;
+
+    public Cat() {
+
+    }
 
     public Cat(String catName, String catBreed) {
         this.catName = catName;
@@ -18,30 +21,26 @@ public class Cat {
     }
 
     public String getCatBreed() {
-        if ( catName.equalsIgnoreCase("Nacho")) {
+        if (catName != null) {
+            if (catName.equalsIgnoreCase("Nacho")) {
                 catBreed = "Maine Coon";
-        } else if ( catName.equalsIgnoreCase("Olivier")) {
-            catBreed = "PersianxRagdoll";
-        } else {
-            catBreed = "Generic";
+            } else if (catName.equalsIgnoreCase("Olivier")) {
+                catBreed = "PersianxRagdoll";
+            } else {
+                catBreed = "Generic";
+            }
+
         }
         return catName + " is a " + catBreed;
     }
 
-    public void appendCat(String catName, String catBreed) {
-        this.catName =  catName;
-        this.catBreed = catBreed;
 
-        ObjectMapper mapper = new ObjectMapper();
+    public Map<String, String> getCatBreeds() {
+        return catBreeds;
+    }
 
-
-        try {
-            mapper.writeValue(new File("cat.json"), catName + catBreed);
-            String jsonString = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(catName+ "" + catBreed);
-            System.out.println(jsonString);
-        }  catch (Exception e) {
-            e.printStackTrace();
-        }
+    public void setCatBreeds(Map<String, String> catBreeds) {
+        this.catBreeds = catBreeds;
     }
 
 }
