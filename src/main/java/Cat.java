@@ -1,3 +1,9 @@
+package main.java;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.io.File;
+
 public class Cat {
 
     private String catName, catBreed;
@@ -25,6 +31,17 @@ public class Cat {
     public void appendCat(String catName, String catBreed) {
         this.catName =  catName;
         this.catBreed = catBreed;
+
+        ObjectMapper mapper = new ObjectMapper();
+
+
+        try {
+            mapper.writeValue(new File("cat.json"), catName + catBreed);
+            String jsonString = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(catName+ "" + catBreed);
+            System.out.println(jsonString);
+        }  catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }
