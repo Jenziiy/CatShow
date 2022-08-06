@@ -1,8 +1,10 @@
 package main.java;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SequenceWriter;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,10 +12,6 @@ public class Cat {
 
     private String catName, catBreed;
     Map<String, String> catBreeds;
-
-    public Cat() {
-
-    }
 
     public Cat(String catName, String catBreed) {
         this.catName = catName;
@@ -31,7 +29,7 @@ public class Cat {
             } else if (catName.equalsIgnoreCase("Olivier")) {
                 catBreed = "PersianxRagdoll";
             } else {
-                if (catBreed == null) { catBreed = "European shorthair"; }
+                if (catBreed == null || catBreed == "") { catBreed = "European shorthair"; }
                Map<String, String> catBreeds = new HashMap<>();
                 catBreeds.put(catName, catBreed);
                 this.setCatBreeds(catBreeds);
@@ -50,16 +48,22 @@ public class Cat {
     public void setCatBreeds(Map<String, String> catBreeds) {
         this.catBreeds = catBreeds;
 
-        catBreeds.put("Garfield", "Orange Tabby");
-        catBreeds.put("Mr.Tinkles", "Persian");
-        catBreeds.put("Calico", "Exotic Shorthair");
+//        catBreeds.put("Garfield", "Orange Tabby");
+//        catBreeds.put("Mr.Tinkles", "Persian");
+//        catBreeds.put("Calico", "Exotic Shorthair");
 
-        ObjectMapper mapper = new ObjectMapper();
 
         try {
-            mapper.writeValue(new File("cat.json"), this.catBreeds);
-            String jsonString = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(this.catBreeds);
-            System.out.println(jsonString);
+            File catFile = new File("c:\\users\\jeani\\Desktop\\cat.json");
+            FileWriter fileWriter = new FileWriter(catFile, true);
+            ObjectMapper mapper = new ObjectMapper();
+
+            //JsonGenerator g = mapper.getFactory().createGenerator(new FileOutputStream(catFile));
+            SequenceWriter seqWriter = mapper.writer().writeValuesAsArray(fileWriter);
+            seqWriter.write(this.catBreeds);
+            //String jsonString = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(this.catBreeds);
+            //System.out.println(jsonString);
+            seqWriter.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
