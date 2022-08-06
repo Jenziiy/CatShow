@@ -40,7 +40,6 @@ public class Cat {
         return catName + " is a " + catBreed;
     }
 
-
     public Map<String, String> getCatBreeds() {
         return catBreeds;
     }
@@ -51,7 +50,6 @@ public class Cat {
 //        catBreeds.put("Garfield", "Orange Tabby");
 //        catBreeds.put("Mr.Tinkles", "Persian");
 //        catBreeds.put("Calico", "Exotic Shorthair");
-
 
         try {
             File catFile = new File("c:\\users\\jeani\\Desktop\\cat.json");

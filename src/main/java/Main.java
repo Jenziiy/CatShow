@@ -20,6 +20,5 @@ public class Main {
        if (catOne != null) { System.out.println(catOne.getCatBreed()); }
        else {System.out.println("Please fill out a catname at least for this to work out");}
 
-
     }
 }
