@@ -29,7 +29,7 @@ public class Cat {
             } else if (catName.equalsIgnoreCase("Olivier")) {
                 catBreed = "PersianxRagdoll";
             } else {
-                if (catBreed == null || catBreed == "") { catBreed = "European shorthair"; }
+                if (catBreed == "" || catBreed == null) { catBreed = "European shorthair"; }
                Map<String, String> catBreeds = new HashMap<>();
                 catBreeds.put(catName, catBreed);
                 this.setCatBreeds(catBreeds);

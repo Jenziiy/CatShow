@@ -13,7 +13,7 @@ public class Main {
 
         System.out.println("(Optionally) Please enter the breed of your cat ");
         String catBreed = sc.nextLine();
-        if ( catBreed == null) { catOne = new Cat(catNameInput);
+        if ( catBreed == "") { catOne = new Cat(catNameInput);
         } else if (catNameInput != "" && catBreed != "") {
         catOne = new Cat(catNameInput, catBreed); }
 
